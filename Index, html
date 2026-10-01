@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="id" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masria #12 - Portofolio Atlet Bola Voli Kebanggaan Tolitoli</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Chart.js for Skill Radar -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Canvas Confetti for Trophy Celebration -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#0F2C59',
+                            royal: '#1E40AF',
+                            gold: '#FACC15',
+                            goldHover: '#EAB308',
+                            darkBg: '#080C14',
+                            darkCard: '#0F172A',
+                            darkBorder: '#1E293B',
+                            lightBg: '#F8FAFC',
+                            lightCard: '#FFFFFF',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    },
+                    animation: {
+                        'bounce-slow': 'bounce 3s infinite',
+                        'pulse-glow': 'pulseGlow 2s infinite alternate',
+                        'float': 'float 4s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%': { boxShadow: '0 0 15px rgba(250, 204, 21, 0.2)' },
+                            '100%': { boxShadow: '0 0 30px rgba(250, 204, 21, 0.7)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Glassmorphism & Utilities */
+        .glass-card-dark {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card-light {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(15, 23, 42, 0.08);
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFE259 0%, #FFA751 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .blue-gradient-text {
+            background: linear-gradient(135deg, #60A5FA 0%, #2563EB 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-gradient-bg {
+            background: linear-gradient(135deg, #FACC15 0%, #EAB308 100%);
+        }
+        .sports-badge-shadow {
+            box-shadow: 0 4px 20px -2px rgba(250, 204, 21, 0.35);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #080C14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1E293B;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FACC15;
+        }
+    </style>
+</head>
+<body class="bg-brand-darkBg text-slate-100 font-sans antialiased transition-colors duration-300 relative overflow-x-hidden">
+
+    <!-- Dynamic Volleyball Background Canvas -->
+    <canvas id="bgCanvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-40"></canvas>
+
+    <!-- Sticky Navigation Bar -->
+    <header class="sticky top-0 z-50 w-full transition-all duration-300" id="mainHeader">
+        <div class="glass-card-dark border-b border-slate-800/80 px-4 sm:px-8 py-3.5">
+            <div class="max-w-7xl mx-auto flex items-center justify-between">
+                
+                <!-- Brand Logo -->
+                <a href="#beranda" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl gold-gradient-bg flex items-center justify-center font-heading font-black text-slate-950 text-xl shadow-md group-hover:scale-105 transition-transform">
+                        12
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-heading font-black text-xl tracking-wider uppercase text-white flex items-center gap-1.5">
+                            MASRIA <span class="text-brand-gold font-bold text-sm">#12</span>
+                        </span>
+                        <span class="text-[10px] text-slate-400 font-semibold tracking-widest uppercase -mt-1">Tolitoli Athlete</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+                    <a href="#beranda" class="nav-link px-3.5 py-2 rounded-lg text-sm font-semibold text-slate-300 hover:text-brand-gold hover:bg-slate-800/50 transition">Beranda</a>
+                    <a href="#profil" class="nav-link px-3.5 py-2 rounded-lg text-sm font-semibold text-slate-300 hover:text-brand-gold hover:bg-slate-800/50 transition">Profil</a>
+                    <a href="#prestasi" class="nav-link px-3.5 py-2 rounded-lg text-sm font-semibold text-slate-300 hover:text-brand-gold hover:bg-slate-800/50 transition">Prestasi</a>
+                    <a href="#keahlian" class="nav-link px-3.5 py-2 rounded-lg text-sm font-semibold text-slate-300 hover:text-brand-gold hover:bg-slate-800/50 transition">Keahlian</a>
+                    <a href="#galeri" class="nav-link px-3.5 py-2 rounded-lg text-sm font-semibold text-slate-300 hover:text-brand-gold hover:bg-slate-800/50 transition">Galeri</a>
+                    <a href="#kontak" class="nav-link px-3.5 py-2 rounded-lg text-sm font-semibold text-slate-300 hover:text-brand-gold hover:bg-slate-800/50 transition">Kontak</a>
+                </nav>
+
+                <!-- Actions: Theme Switcher & Contact Button -->
+                <div class="flex items-center gap-3">
+                    <!-- Theme Toggle Button -->
+                    <button id="themeToggle" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-brand-gold transition border border-slate-700/60" title="Ubah Mode Tampilan">
+                        <i class="fa-solid fa-moon text-lg" id="themeIcon"></i>
+                    </button>
+
+                    <!-- Recruit / Contact Quick Button -->
+                    <a href="#kontak" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl gold-gradient-bg text-slate-950 font-heading font-bold text-sm tracking-wide hover:shadow-lg hover:shadow-yellow-500/20 hover:scale-105 transition-all">
+                        <i class="fa-solid fa-paper-plane"></i> Sparing / Merekrut
+                    </a>
+
+                    <!-- Mobile Drawer Toggle Button -->
+                    <button id="mobileMenuBtn" class="md:hidden p-2.5 rounded-xl bg-slate-800 text-slate-200 hover:text-brand-gold focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl" id="menuIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div id="mobileDrawer" class="hidden md:hidden glass-card-dark border-b border-slate-800 px-6 py-4 space-y-3 transition-all duration-300">
+            <a href="#beranda" class="mobile-nav-link block py-2 text-slate-200 font-semibold hover:text-brand-gold border-b border-slate-800/60">Beranda</a>
+            <a href="#profil" class="mobile-nav-link block py-2 text-slate-200 font-semibold hover:text-brand-gold border-b border-slate-800/60">Profil & Bio</a>
+            <a href="#prestasi" class="mobile-nav-link block py-2 text-slate-200 font-semibold hover:text-brand-gold border-b border-slate-800/60">Prestasi & Kabinet Trofi</a>
+            <a href="#keahlian" class="mobile-nav-link block py-2 text-slate-200 font-semibold hover:text-brand-gold border-b border-slate-800/60">Matriks Keahlian</a>
+            <a href="#galeri" class="mobile-nav-link block py-2 text-slate-200 font-semibold hover:text-brand-gold border-b border-slate-800/60">Galeri & Highlight</a>
+            <a href="#kontak" class="mobile-nav-link block py-2 text-slate-200 font-semibold hover:text-brand-gold">Kontak & Undangan</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="beranda" class="relative z-10 pt-10 lg:pt-16 pb-20 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Column: Hero Text Content -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    
+                    <!-- Badges -->
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
+                        <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/30 text-brand-gold text-xs font-bold uppercase tracking-wider">
+                            <i class="fa-solid fa-crown"></i> Multi-Champion Athlete
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-bold uppercase tracking-wider">
+                            <i class="fa-solid fa-location-dot"></i> Tolitoli, Sulawesi Tengah
+                        </span>
+                    </div>
+
+                    <!-- Main Title -->
+                    <div>
+                        <h2 class="text-slate-400 font-heading text-lg sm:text-xl font-bold uppercase tracking-widest mb-1">Pemain Bola Voli Profesional</h2>
+                        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-heading font-black tracking-tight text-white leading-none">
+                            MASRIA <span class="gold-gradient-text">#12</span>
+                        </h1>
+                        <p class="text-xl sm:text-2xl font-semibold text-blue-400 mt-2 font-heading">
+                            Outside Hitter & Main Spiker
+                        </p>
+                    </div>
+
+                    <!-- Short Bio Statement -->
+                    <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0 font-light">
+                        Atlet voli andalan dari <strong class="text-white font-semibold">Kabupaten Tolitoli</strong> dengan reputasi smash tajam berkecepatan tinggi, pertahanan solid, dan kepemimpinan berjiwa juara. Telah mengharumkan nama daerah di berbagai ajang kejuaraan daerah maupun turnamen terbuka Sulawesi Tengah.
+                    </p>
+
+                    <!-- Key Metrics Pill Bar -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 py-2 max-w-xl mx-auto lg:mx-0">
+                        <div class="p-3 rounded-2xl glass-card-dark border border-slate-800 text-center lg:text-left">
+                            <span class="text-xs text-slate-400 block font-medium">Jangkauan Spike</span>
+                            <span class="text-xl font-bold text-brand-gold font-heading">315 cm</span>
+                        </div>
+                        <div class="p-3 rounded-2xl glass-card-dark border border-slate-800 text-center lg:text-left">
+                            <span class="text-xs text-slate-400 block font-medium">Jangkauan Block</span>
+                            <span class="text-xl font-bold text-blue-400 font-heading">305 cm</span>
+                        </div>
+                        <div class="col-span-2 sm:col-span-1 p-3 rounded-2xl glass-card-dark border border-slate-800 text-center lg:text-left">
+                            <span class="text-xs text-slate-400 block font-medium">Tinggi Badan</span>
+                            <span class="text-xl font-bold text-white font-heading">178 cm</span>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#prestasi" class="w-full sm:w-auto px-7 py-3.5 rounded-xl gold-gradient-bg text-slate-950 font-heading font-extrabold text-sm tracking-wide text-center hover:scale-105 hover:shadow-xl hover:shadow-yellow-500/20 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-trophy"></i> Lihat Daftar Prestasi
+                        </a>
+                        <a href="#kontak" class="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-white font-heading font-bold text-sm tracking-wide text-center border border-slate-700 hover:border-brand-gold/50 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-envelope"></i> Hubungi / Undang
+                        </a>
+                        <button onclick="downloadAthleteCV()" class="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 font-heading font-bold text-sm border border-blue-500/30 hover:border-blue-400 transition-all flex items-center justify-center gap-2" title="Unduh Resume Atlet">
+                            <i class="fa-solid fa-file-arrow-down"></i> Profil CV
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Interactive Player Avatar / Card -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-full max-w-md">
+                        
+                        <!-- Glowing Backlight Effect -->
+                        <div class="absolute -inset-1 bg-gradient-to-r from-brand-gold via-blue-600 to-amber-500 rounded-3xl blur-2xl opacity-30 animate-pulse"></div>
+
+                        <!-- Player Card Container -->
+                        <div class="relative glass-card-dark rounded-3xl p-6 border border-slate-700/80 shadow-2xl overflow-hidden group">
+                            
+                            <!-- Card Header Badge -->
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 rounded-full bg-slate-800 text-brand-gold text-xs font-bold uppercase tracking-wider border border-slate-700">
+                                    <i class="fa-solid fa-volleyball animate-spin-slow"></i> Official Player Card
+                                </span>
+                                <span class="text-2xl font-black font-heading text-slate-600 group-hover:text-brand-gold transition-colors">#12</span>
+                            </div>
+
+                            <!-- Player Portrait Showcase -->
+                            <div class="relative h-96 rounded-2xl overflow-hidden bg-gradient-to-b from-slate-800 to-slate-950 flex items-center justify-center border border-slate-800">
+                                <!-- Volleyball Silhouette Illustration / Photo -->
+                                <img src="https://images.unsplash.com/photo-1592656094267-764a45160876?q=80&w=800&auto=format&fit=crop" 
+                                     alt="Masria Volleyball Athlete" 
+                                     class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-90">
+                                
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+
+                                <!-- Floating Badge Overlay -->
+                                <div class="absolute bottom-4 left-4 right-4 p-4 rounded-xl glass-card-dark border border-slate-700/60 backdrop-blur-md">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <p class="text-xs text-slate-400 font-medium">Tim / Daerah Origin</p>
+                                            <h4 class="text-base font-bold text-white font-heading">KABUPATEN TOLITOLI</h4>
+                                        </div>
+                                        <div class="text-right">
+                                            <p class="text-xs text-slate-400 font-medium">Status Gelar</p>
+                                            <span class="text-xs font-black text-brand-gold uppercase tracking-wider block">LANGGANAN JUARA</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card Footer Quick Features -->
+                            <div class="grid grid-cols-3 gap-2 mt-4 text-center">
+                                <div class="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800">
+                                    <i class="fa-solid fa-bolt text-brand-gold text-sm mb-1 block"></i>
+                                    <span class="text-[11px] text-slate-400 block">Smash Speed</span>
+                                    <span class="text-xs font-bold text-white">90+ km/h</span>
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800">
+                                    <i class="fa-solid fa-shield-halved text-blue-400 text-sm mb-1 block"></i>
+                                    <span class="text-[11px] text-slate-400 block">Dig Rating</span>
+                                    <span class="text-xs font-bold text-white">A+ High</span>
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800">
+                                    <i class="fa-solid fa-award text-amber-400 text-sm mb-1 block"></i>
+                                    <span class="text-[11px] text-slate-400 block">MVP Titles</span>
+                                    <span class="text-xs font-bold text-white">5x Best</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ANIMATED STATS BANNER -->
+    <section class="relative z-10 py-10 bg-slate-900/60 border-y border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                
+                <div class="p-4 rounded-2xl glass-card-dark border border-slate-800/80 hover:border-brand-gold/40 transition">
+                    <div class="text-3xl sm:text-5xl font-black font-heading gold-gradient-text mb-1 flex items-center justify-center gap-1">
+                        <span class="counter" data-target="20">0</span>+
+                    </div>
+                    <p class="text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wider">Total Kejuaraan</p>
+                </div>
+
+                <div class="p-4 rounded-2xl glass-card-dark border border-slate-800/80 hover:border-brand-gold/40 transition">
+                    <div class="text-3xl sm:text-5xl font-black font-heading text-blue-400 mb-1 flex items-center justify-center gap-1">
+                        <span class="counter" data-target="12">0</span>+
+                    </div>
+                    <p class="text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wider">Medali Emas / Tropi 1</p>
+                </div>
+
+                <div class="p-4 rounded-2xl glass-card-dark border border-slate-800/80 hover:border-brand-gold/40 transition">
+                    <div class="text-3xl sm:text-5xl font-black font-heading text-amber-400 mb-1 flex items-center justify-center gap-1">
+                        <span class="counter" data-target="5">0</span>x
+                    </div>
+                    <p class="text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wider">MVP / Pemain Terbaik</p>
+                </div>
+
+                <div class="p-4 rounded-2xl glass-card-dark border border-slate-800/80 hover:border-brand-gold/40 transition">
+                    <div class="text-3xl sm:text-5xl font-black font-heading text-emerald-400 mb-1 flex items-center justify-center gap-1">
+                        <span class="counter" data-target="8">0</span>+
+                    </div>
+                    <p class="text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-wider">Tahun Pengalaman</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PROFILE & ATHLETIC STORY SECTION -->
+    <section id="profil" class="relative z-10 py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-gold text-xs font-bold uppercase tracking-widest block mb-2"><i class="fa-solid fa-user-ninja"></i> BIOGRAFI ATLET</span>
+                <h2 class="text-3xl sm:text-4xl font-heading font-black text-white">Dedikasi & Perjalanan Karir dari Tolitoli</h2>
+                <div class="w-20 h-1.5 gold-gradient-bg mx-auto rounded-full mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                
+                <!-- Story Description -->
+                <div class="lg:col-span-7 space-y-5 text-slate-300 leading-relaxed font-light">
+                    <p class="text-lg font-normal text-slate-200">
+                        <strong class="text-brand-gold font-bold">Masria</strong> lahir dan tumbuh dengan semangat olahraga tinggi di Kabupaten Tolitoli, Sulawesi Tengah. Sejak awal karirnya di bangku sekolah, bakat alami dan lompatan tinggi Masria menjadikannya pemain yang menonjol di arena bola voli regional.
+                    </p>
+                    <p>
+                        Dikenal dengan julukan penyerang serba bisa (*Outside Hitter*), Masria mengombinasikan kekuatan pukulan (*Power Spike*) dengan penempatan bola yang cerdik. Konsistensi latihan fisik keras di lapangan Tolitoli telah membentuk ketahanan fisik dan mental juara yang mengantarkan timnya berulang kali menaiki podium tertinggi.
+                    </p>
+                    <p>
+                        Bagi Masria, bola voli bukan sekadar permainan angka, melainkan wujud kerja sama tim, kedisiplinan, dan kehormatan membawa nama daerah Tolitoli hingga tingkat Provinsi Sulawesi Tengah.
+                    </p>
+
+                    <!-- Core Athletic Values -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 flex items-start gap-3">
+                            <div class="p-2.5 rounded-lg bg-brand-gold/10 text-brand-gold text-lg">
+                                <i class="fa-solid fa-fire-flame-curved"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white font-heading text-sm">Etos Kerja Tinggi</h4>
+                                <p class="text-xs text-slate-400 mt-0.5">Disiplin latihan harian, kekuatan fisik, dan konsistensi stamina.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 flex items-start gap-3">
+                            <div class="p-2.5 rounded-lg bg-blue-500/10 text-blue-400 text-lg">
+                                <i class="fa-solid fa-people-group"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white font-heading text-sm">Jiwa Kepemimpinan</h4>
+                                <p class="text-xs text-slate-400 mt-0.5">Mampu membakar semangat rekan tim di saat-saat krusial set penentu.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Physical & Technical Specs Card -->
+                <div class="lg:col-span-5">
+                    <div class="glass-card-dark p-6 sm:p-8 rounded-3xl border border-slate-800 relative">
+                        <h3 class="text-xl font-bold font-heading text-white mb-6 flex items-center gap-2 border-b border-slate-800 pb-3">
+                            <i class="fa-solid fa-sliders text-brand-gold"></i> Spesifikasi Atletik
+                        </h3>
+
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center py-2 border-b border-slate-800/60">
+                                <span class="text-sm text-slate-400">Nama Lengkap</span>
+                                <span class="text-sm font-bold text-white">Masria</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-slate-800/60">
+                                <span class="text-sm text-slate-400">Nomor Punggung</span>
+                                <span class="text-sm font-extrabold text-brand-gold">#12</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-slate-800/60">
+                                <span class="text-sm text-slate-400">Asal Daerah</span>
+                                <span class="text-sm font-bold text-white">Tolitoli, Sulawesi Tengah</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-slate-800/60">
+                                <span class="text-sm text-slate-400">Posisi Utamain</span>
+                                <span class="text-sm font-bold text-blue-400">Outside Hitter / Open Spiker</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-slate-800/60">
+                                <span class="text-sm text-slate-400">Tangan Dominan</span>
+                                <span class="text-sm font-bold text-white">Tangan Kanan (Right-Handed)</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-slate-800/60">
+                                <span class="text-sm text-slate-400">Spike Reach</span>
+                                <span class="text-sm font-bold text-brand-gold">315 cm</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2">
+                                <span class="text-sm text-slate-400">Block Reach</span>
+                                <span class="text-sm font-bold text-blue-400">305 cm</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ACHIEVEMENTS & TROPHY CABINET SECTION -->
+    <section id="prestasi" class="relative z-10 py-20 bg-slate-900/40 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-brand-gold text-xs font-bold uppercase tracking-widest block mb-2"><i class="fa-solid fa-trophy"></i> REKAM JEJAK JUARA</span>
+                <h2 class="text-3xl sm:text-4xl font-heading font-black text-white">Kabinet Trofi & Kejuaraan</h2>
+                <p class="text-slate-400 text-sm mt-2">Daftar turnamen dan penghargaan yang diraih Masria sepanjang karirnya.</p>
+                <div class="w-20 h-1.5 gold-gradient-bg mx-auto rounded-full mt-4"></div>
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <div class="flex flex-wrap items-center justify-center gap-2 mb-10" id="trophyFilterTabs">
+                <button data-filter="all" class="filter-btn active px-5 py-2.5 rounded-xl font-heading text-xs font-bold uppercase tracking-wider transition-all gold-gradient-bg text-slate-950 shadow-md">
+                    Semua Prestasi
+                </button>
+                <button data-filter="daerah" class="filter-btn px-5 py-2.5 rounded-xl font-heading text-xs font-bold uppercase tracking-wider transition-all bg-slate-800/90 hover:bg-slate-700 text-slate-300 border border-slate-700">
+                    Kejuaraan Daerah (Kejurda)
+                </button>
+                <button data-filter="open" class="filter-btn px-5 py-2.5 rounded-xl font-heading text-xs font-bold uppercase tracking-wider transition-all bg-slate-800/90 hover:bg-slate-700 text-slate-300 border border-slate-700">
+                    Turnamen Open / Bupati Cup
+                </button>
+                <button data-filter="mvp" class="filter-btn px-5 py-2.5 rounded-xl font-heading text-xs font-bold uppercase tracking-wider transition-all bg-slate-800/90 hover:bg-slate-700 text-slate-300 border border-slate-700">
+                    Penghargaan Individu (MVP)
+                </button>
+            </div>
+
+            <!-- Trophy Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="trophyGrid">
+                
+                <!-- Trophy Item 1 -->
+                <div class="trophy-card glass-card-dark rounded-2xl p-6 border border-slate-800 hover:border-brand-gold/60 transition-all duration-300 group cursor-pointer" 
+                     data-category="open"
+                     onclick="openTrophyModal('Bupati Cup Tolitoli 2025', 'JUARA 1 (MEDALI EMAS)', '2025', 'Tolitoli', 'Penampilan luar biasa memimpin tim utama Tolitoli meraih gelar Juara 1 tanpa terkalahkan satu set pun di laga semifinal dan final.', 'MVP & Pencetak Poin Terbanyak (28 Poin Final)')">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="p-3 rounded-xl bg-amber-500/10 text-amber-400 text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-trophy"></i>
+                        </span>
+                        <span class="px-3 py-1 rounded-full bg-brand-gold/20 text-brand-gold text-xs font-black uppercase tracking-wider border border-brand-gold/30">
+                            Juara 1 Emas
+                        </span>
+                    </div>
+                    <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider block mb-1">Tahun 2025 • Turnamen Open</span>
+                    <h3 class="text-xl font-bold font-heading text-white group-hover:text-brand-gold transition-colors mb-2">Bupati Cup Tolitoli 2025</h3>
+                    <p class="text-slate-400 text-xs leading-relaxed line-clamp-2">Memimpin tim sebagai Spiker Utama meraih juara 1 dan menyabet piala gilir di Gor Mokodimpan Tolitoli.</p>
+                    <div class="mt-4 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-300 font-semibold">
+                        <span><i class="fa-solid fa-star text-amber-400 mr-1"></i> Special MVP Award</span>
+                        <span class="text-brand-gold group-hover:translate-x-1 transition-transform">Detail <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
+                    </div>
+                </div>
+
+                <!-- Trophy Item 2 -->
+                <div class="trophy-card glass-card-dark rounded-2xl p-6 border border-slate-800 hover:border-brand-gold/60 transition-all duration-300 group cursor-pointer" 
+                     data-category="daerah"
+                     onclick="openTrophyModal('Kejurda Voli Sulawesi Tengah 2024', 'JUARA 1 (MEDALI EMAS)', '2024', 'Palu, Sulteng', 'Mewakili Kabupaten Tolitoli di ajang Kejuaraan Daerah se-Sulteng, berhasil mengalahkan tim kuat di laga final 3-2.', 'Outside Hitter Terbaik')">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="p-3 rounded-xl bg-amber-500/10 text-amber-400 text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-award"></i>
+                        </span>
+                        <span class="px-3 py-1 rounded-full bg-brand-gold/20 text-brand-gold text-xs font-black uppercase tracking-wider border border-brand-gold/30">
+                            Juara 1 Emas
+                        </span>
+                    </div>
+                    <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider block mb-1">Tahun 2024 • Kejuaraan Daerah</span>
+                    <h3 class="text-xl font-bold font-heading text-white group-hover:text-brand-gold transition-colors mb-2">Kejurda Voli Sulteng 2024</h3>
+                    <p class="text-slate-400 text-xs leading-relaxed line-clamp-2">Membawa nama Tolitoli menjadi yang terbaik di tingkat provinsi Sulawesi Tengah dengan performa smash memukau.</p>
+                    <div class="mt-4 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-300 font-semibold">
+                        <span><i class="fa-solid fa-medal text-amber-400 mr-1"></i> Medali Emas Sulteng</span>
+                        <span class="text-brand-gold group-hover:translate-x-1 transition-transform">Detail <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
+                    </div>
+                </div>
+
+                <!-- Trophy Item 3 -->
+                <div class="trophy-card glass-card-dark rounded-2xl p-6 border border-slate-800 hover:border-brand-gold/60 transition-all duration-300 group cursor-pointer" 
+                     data-category="mvp"
+                     onclick="openTrophyModal('MVP Sulteng Open Volleyball 2024', 'MOST VALUABLE PLAYER', '2024', 'Sulawesi Tengah', 'Penghargaan individu paling bergengsi atas efisiensi serangan mencapai 68% dan statistik bertahan tertinggi.', 'Gelar Pemain Terbaik MVP')">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="p-3 rounded-xl bg-yellow-500/10 text-brand-gold text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-crown"></i>
+                        </span>
+                        <span class="px-3 py-1 rounded-full bg-yellow-500/20 text-brand-gold text-xs font-black uppercase tracking-wider border border-yellow-500/30">
+                            MVP Award
+                        </span>
+                    </div>
+                    <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider block mb-1">Tahun 2024 • Penghargaan Individu</span>
+                    <h3 class="text-xl font-bold font-heading text-white group-hover:text-brand-gold transition-colors mb-2">Pemain Terbaik (MVP) Sulteng Open</h3>
+                    <p class="text-slate-400 text-xs leading-relaxed line-clamp-2">Terpilih sebagai Pemain Terbaik berdasarkan voting teknis tim penilai turnamen regional.</p>
+                    <div class="mt-4 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-300 font-semibold">
+                        <span><i class="fa-solid fa-bolt text-brand-gold mr-1"></i> MVP Player Title</span>
+                        <span class="text-brand-gold group-hover:translate-x-1 transition-transform">Detail <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
+                    </div>
+                </div>
+
+                <!-- Trophy Item 4 -->
+                <div class="trophy-card glass-card-dark rounded-2xl p-6 border border-slate-800 hover:border-brand-gold/60 transition-all duration-300 group cursor-pointer" 
+                     data-category="daerah"
+                     onclick="openTrophyModal('Porprov Sulawesi Tengah IX 2023', 'JUARA 1 (MEDALI EMAS)', '2023', 'Banggai / Palu', 'Laga dramatis di set ke-5 penentu di mana Masria mencetak 5 kali jump serve ace beruntun.', 'Medali Emas Porprov')">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="p-3 rounded-xl bg-amber-500/10 text-amber-400 text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-medal"></i>
+                        </span>
+                        <span class="px-3 py-1 rounded-full bg-brand-gold/20 text-brand-gold text-xs font-black uppercase tracking-wider border border-brand-gold/30">
+                            Juara 1 Emas
+                        </span>
+                    </div>
+                    <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider block mb-1">Tahun 2023 • Kejuaraan Daerah</span>
+                    <h3 class="text-xl font-bold font-heading text-white group-hover:text-brand-gold transition-colors mb-2">PORPROV Sulawesi Tengah 2023</h3>
+                    <p class="text-slate-400 text-xs leading-relaxed line-clamp-2">Meraih podium 1 Emas Pekan Olahraga Provinsi membela nama Kabupaten Tolitoli.</p>
+                    <div class="mt-4 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-300 font-semibold">
+                        <span><i class="fa-solid fa-certificate text-brand-gold mr-1"></i> Emas Pekan Olahraga</span>
+                        <span class="text-brand-gold group-hover:translate-x-1 transition-transform">Detail <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
+                    </div>
+                </div>
+
+                <!-- Trophy Item 5 -->
+                <div class="trophy-card glass-card-dark rounded-2xl p-6 border border-slate-800 hover:border-brand-gold/60 transition-all duration-300 group cursor-pointer" 
+                     data-category="mvp"
+                     onclick="openTrophyModal('Piala Gubernur Sulteng 2023', 'BEST OUTSIDE HITTER', '2023', 'Palu', 'Anugerah Spiker Luar Terbaik dengan akurasi pukulan smash paling mematikan sepanjang kejuaraan.', 'Best Spiker Title')">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="p-3 rounded-xl bg-blue-500/10 text-blue-400 text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-burst"></i>
+                        </span>
+                        <span class="px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-black uppercase tracking-wider border border-blue-500/30">
+                            Best Spiker
+                        </span>
+                    </div>
+                    <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider block mb-1">Tahun 2023 • Penghargaan Individu</span>
+                    <h3 class="text-xl font-bold font-heading text-white group-hover:text-brand-gold transition-colors mb-2">Best Outside Hitter Piala Gubernur</h3>
+                    <p class="text-slate-400 text-xs leading-relaxed line-clamp-2">Predikat spiker terbaik turnamen dengan rata-rata 18 poin per pertandingan.</p>
+                    <div class="mt-4 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-300 font-semibold">
+                        <span><i class="fa-solid fa-fire text-amber-400 mr-1"></i> Top Scorer Spiker</span>
+                        <span class="text-brand-gold group-hover:translate-x-1 transition-transform">Detail <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
+                    </div>
+                </div>
+
+                <!-- Trophy Item 6 -->
+                <div class="trophy-card glass-card-dark rounded-2xl p-6 border border-slate-800 hover:border-brand-gold/60 transition-all duration-300 group cursor-pointer" 
+                     data-category="open"
+                     onclick="openTrophyModal('Turnamen Rektor Cup Tolitoli 2022', 'JUARA 1 UTAMA', '2022', 'Tolitoli', 'Gelar juara berturut-turut ditingkat perguruan tinggi / umum regional Tolitoli.', 'Juara Umum 1')">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="p-3 rounded-xl bg-emerald-500/10 text-emerald-400 text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-trophy"></i>
+                        </span>
+                        <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-black uppercase tracking-wider border border-emerald-500/30">
+                            Juara 1
+                        </span>
+                    </div>
+                    <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider block mb-1">Tahun 2022 • Turnamen Open</span>
+                    <h3 class="text-xl font-bold font-heading text-white group-hover:text-brand-gold transition-colors mb-2">Rektor Cup Open Tolitoli 2022</h3>
+                    <p class="text-slate-400 text-xs leading-relaxed line-clamp-2">Membawa tim lokal meraih posisi puncak dalam laga penuh tensi tinggi.</p>
+                    <div class="mt-4 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-300 font-semibold">
+                        <span><i class="fa-solid fa-shield text-emerald-400 mr-1"></i> Undefeated Season</span>
+                        <span class="text-brand-gold group-hover:translate-x-1 transition-transform">Detail <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SKILL MATRIX & RADAR CHART SECTION -->
+    <section id="keahlian" class="relative z-10 py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-gold text-xs font-bold uppercase tracking-widest block mb-2"><i class="fa-solid fa-chart-pie"></i> EVALUASI ATRIBUT</span>
+                <h2 class="text-3xl sm:text-4xl font-heading font-black text-white">Matriks Keahlian & Atribut Voli</h2>
+                <p class="text-slate-400 text-sm mt-2">Analisis teknis atribut permainan Masria di lapangan bola voli.</p>
+                <div class="w-20 h-1.5 gold-gradient-bg mx-auto rounded-full mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                
+                <!-- Skill Bars Breakdown -->
+                <div class="lg:col-span-6 space-y-6">
+                    
+                    <!-- Skill Item 1 -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="font-bold text-white font-heading flex items-center gap-2">
+                                <i class="fa-solid fa-bolt text-brand-gold"></i> Power Smash & Spike Accuracy
+                            </span>
+                            <span class="font-black text-brand-gold font-heading">95%</span>
+                        </div>
+                        <div class="h-3 w-full bg-slate-800 rounded-full overflow-hidden p-0.5 border border-slate-700/60">
+                            <div class="h-full gold-gradient-bg rounded-full transition-all duration-1000" style="width: 95%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Skill Item 2 -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="font-bold text-white font-heading flex items-center gap-2">
+                                <i class="fa-solid fa-plane-departure text-blue-400"></i> Jump Serve & Float Serve
+                            </span>
+                            <span class="font-black text-blue-400 font-heading">90%</span>
+                        </div>
+                        <div class="h-3 w-full bg-slate-800 rounded-full overflow-hidden p-0.5 border border-slate-700/60">
+                            <div class="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full transition-all duration-1000" style="width: 90%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Skill Item 3 -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="font-bold text-white font-heading flex items-center gap-2">
+                                <i class="fa-solid fa-shield-halved text-emerald-400"></i> Court Defense & Digging
+                            </span>
+                            <span class="font-black text-emerald-400 font-heading">85%</span>
+                        </div>
+                        <div class="h-3 w-full bg-slate-800 rounded-full overflow-hidden p-0.5 border border-slate-700/60">
+                            <div class="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full transition-all duration-1000" style="width: 85%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Skill Item 4 -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="font-bold text-white font-heading flex items-center gap-2">
+                                <i class="fa-solid fa-hand-fist text-purple-400"></i> Double Blocking & Timing
+                            </span>
+                            <span class="font-black text-purple-400 font-heading">88%</span>
+                        </div>
+                        <div class="h-3 w-full bg-slate-800 rounded-full overflow-hidden p-0.5 border border-slate-700/60">
+                            <div class="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full transition-all duration-1000" style="width: 88%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Skill Item 5 -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="font-bold text-white font-heading flex items-center gap-2">
+                                <i class="fa-solid fa-person-running text-amber-400"></i> Stamina & Agilitas Lapangan
+                            </span>
+                            <span class="font-black text-amber-400 font-heading">92%</span>
+                        </div>
+                        <div class="h-3 w-full bg-slate-800 rounded-full overflow-hidden p-0.5 border border-slate-700/60">
+                            <div class="h-full bg-gradient-to-r from-amber-500 to-orange-500 rounded-full transition-all duration-1000" style="width: 92%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Skill Item 6 -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="font-bold text-white font-heading flex items-center gap-2">
+                                <i class="fa-solid fa-users text-cyan-400"></i> Kepemimpinan & Strategi Tim
+                            </span>
+                            <span class="font-black text-cyan-400 font-heading">90%</span>
+                        </div>
+                        <div class="h-3 w-full bg-slate-800 rounded-full overflow-hidden p-0.5 border border-slate-700/60">
+                            <div class="h-full bg-gradient-to-r from-cyan-500 to-blue-400 rounded-full transition-all duration-1000" style="width: 90%;"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Radar Chart Container -->
+                <div class="lg:col-span-6 flex justify-center">
+                    <div class="w-full glass-card-dark p-6 rounded-3xl border border-slate-800 flex flex-col items-center">
+                        <h4 class="text-base font-bold font-heading text-white mb-4 text-center">Visualisasi Radar Atribut</h4>
+                        <div class="w-full max-w-sm aspect-square relative">
+                            <canvas id="skillRadarChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CAREER TIMELINE SECTION -->
+    <section class="relative z-10 py-20 bg-slate-900/40 border-t border-slate-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-gold text-xs font-bold uppercase tracking-widest block mb-2"><i class="fa-solid fa-timeline"></i> PERJALANAN WAKTU</span>
+                <h2 class="text-3xl sm:text-4xl font-heading font-black text-white">Timeline Karir Masria</h2>
+                <p class="text-slate-400 text-sm mt-2">Jejak langkah perkembangan dari talenta muda Tolitoli hingga atlet voli papan atas daerah.</p>
+                <div class="w-20 h-1.5 gold-gradient-bg mx-auto rounded-full mt-4"></div>
+            </div>
+
+            <!-- Vertical Timeline Container -->
+            <div class="relative border-l-2 border-slate-800 ml-4 sm:ml-32 space-y-12">
+                
+                <!-- Timeline Item 1 -->
+                <div class="relative pl-8 sm:pl-10 group">
+                    <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full gold-gradient-bg flex items-center justify-center text-slate-950 font-black text-xs shadow-lg">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <div class="hidden sm:block absolute -left-32 top-2 text-right w-24">
+                        <span class="text-sm font-extrabold text-brand-gold font-heading">2025 - 2026</span>
+                    </div>
+                    <div class="glass-card-dark p-6 rounded-2xl border border-slate-800 hover:border-brand-gold/50 transition">
+                        <span class="sm:hidden text-xs font-bold text-brand-gold block mb-1">2025 - 2026</span>
+                        <h3 class="text-lg font-bold font-heading text-white">Puncak Karir & Pertahanan Gelar Juara</h3>
+                        <p class="text-slate-400 text-xs mt-2 leading-relaxed">
+                            Memimpin tim utama Tolitoli menjuarai berbagai ajang Open Tournament se-Sulawesi Tengah dan mempertahankan status piala gilir Bupati Cup 2025.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="relative pl-8 sm:pl-10 group">
+                    <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-black text-xs shadow-lg">
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <div class="hidden sm:block absolute -left-32 top-2 text-right w-24">
+                        <span class="text-sm font-extrabold text-blue-400 font-heading">2023 - 2024</span>
+                    </div>
+                    <div class="glass-card-dark p-6 rounded-2xl border border-slate-800 hover:border-blue-500/50 transition">
+                        <span class="sm:hidden text-xs font-bold text-blue-400 block mb-1">2023 - 2024</span>
+                        <h3 class="text-lg font-bold font-heading text-white">Emas Kejurda & Anugerah MVP Provinsi</h3>
+                        <p class="text-slate-400 text-xs mt-2 leading-relaxed">
+                            Meraih Medali Emas Kejurda Sulawesi Tengah dan mengamankan gelar Most Valuable Player (MVP) sebagai spiker terbaik.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 3 -->
+                <div class="relative pl-8 sm:pl-10 group">
+                    <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-emerald-600 flex items-center justify-center text-white font-black text-xs shadow-lg">
+                        <i class="fa-solid fa-medal"></i>
+                    </div>
+                    <div class="hidden sm:block absolute -left-32 top-2 text-right w-24">
+                        <span class="text-sm font-extrabold text-emerald-400 font-heading">2021 - 2022</span>
+                    </div>
+                    <div class="glass-card-dark p-6 rounded-2xl border border-slate-800 hover:border-emerald-500/50 transition">
+                        <span class="sm:hidden text-xs font-bold text-emerald-400 block mb-1">2021 - 2022</span>
+                        <h3 class="text-lg font-bold font-heading text-white">Dominasi Turnamen Antar Daerah</h3>
+                        <p class="text-slate-400 text-xs mt-2 leading-relaxed">
+                            Mulai dipercaya menjadi Kapten / Spiker Utama tim Tolitoli dalam laga kompetisi antar kabupaten dan Rektor Cup.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 4 -->
+                <div class="relative pl-8 sm:pl-10 group">
+                    <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-amber-600 flex items-center justify-center text-white font-black text-xs shadow-lg">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+                    <div class="hidden sm:block absolute -left-32 top-2 text-right w-24">
+                        <span class="text-sm font-extrabold text-amber-400 font-heading">2018 - 2020</span>
+                    </div>
+                    <div class="glass-card-dark p-6 rounded-2xl border border-slate-800 hover:border-amber-500/50 transition">
+                        <span class="sm:hidden text-xs font-bold text-amber-400 block mb-1">2018 - 2020</span>
+                        <h3 class="text-lg font-bold font-heading text-white">Awal Karir Junior Tolitoli</h3>
+                        <p class="text-slate-400 text-xs mt-2 leading-relaxed">
+                            Memulai pembinaan intensif di klub lokal Tolitoli dan pertama kali menembus skuad POPDA mewakili sekolah dan daerah.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- GALLERY & HIGHLIGHTS SECTION -->
+    <section id="galeri" class="relative z-10 py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-brand-gold text-xs font-bold uppercase tracking-widest block mb-2"><i class="fa-solid fa-camera"></i> GALERI FOTO & DOKUMENTASI</span>
+                <h2 class="text-3xl sm:text-4xl font-heading font-black text-white">Momen & Aksi Lapangan</h2>
+                <p class="text-slate-400 text-sm mt-2">Kumpulan dokumentasi pertandingan, selebrasi juara, dan aktivitas latihan Masria.</p>
+                <div class="w-20 h-1.5 gold-gradient-bg mx-auto rounded-full mt-4"></div>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Gallery Item 1 -->
+                <div class="relative rounded-2xl overflow-hidden glass-card-dark border border-slate-800 group cursor-pointer h-64" onclick="openLightbox('https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?q=80&w=1000&auto=format&fit=crop', 'Smash Tajam Babak Final Bupati Cup Tolitoli')">
+                    <img src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?q=80&w=800&auto=format&fit=crop" alt="Volleyball Spike Match" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <span class="px-2.5 py-1 rounded-md bg-brand-gold text-slate-950 font-bold text-[10px] uppercase mb-1 inline-block">Match Action</span>
+                        <h4 class="text-sm font-bold text-white font-heading">Smash Keras Babak Final</h4>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 2 -->
+                <div class="relative rounded-2xl overflow-hidden glass-card-dark border border-slate-800 group cursor-pointer h-64" onclick="openLightbox('https://images.unsplash.com/photo-1592656094267-764a45160876?q=80&w=1000&auto=format&fit=crop', 'Momen Selebrasi Penyerahan Piala Juara 1')">
+                    <img src="https://images.unsplash.com/photo-1592656094267-764a45160876?q=80&w=800&auto=format&fit=crop" alt="Celebration Volleyball" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <span class="px-2.5 py-1 rounded-md bg-blue-500 text-white font-bold text-[10px] uppercase mb-1 inline-block">Selebrasi</span>
+                        <h4 class="text-sm font-bold text-white font-heading">Penyerahan Tropi Juara</h4>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div class="relative rounded-2xl overflow-hidden glass-card-dark border border-slate-800 group cursor-pointer h-64" onclick="openLightbox('https://images.unsplash.com/photo-1547347298-1d7485090407?q=80&w=1000&auto=format&fit=crop', 'Pertahanan Solid Double Block di Depan Net')">
+                    <img src="https://images.unsplash.com/photo-1547347298-1d7485090407?q=80&w=800&auto=format&fit=crop" alt="Volleyball Block Net" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <span class="px-2.5 py-1 rounded-md bg-purple-500 text-white font-bold text-[10px] uppercase mb-1 inline-block">Defense</span>
+                        <h4 class="text-sm font-bold text-white font-heading">Double Block Pertahanan Net</h4>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 4 -->
+                <div class="relative rounded-2xl overflow-hidden glass-card-dark border border-slate-800 group cursor-pointer h-64" onclick="openLightbox('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1000&auto=format&fit=crop', 'Teknik Jump Serve Presisi Tinggi')">
+                    <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800&auto=format&fit=crop" alt="Jump Serve Technique" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <span class="px-2.5 py-1 rounded-md bg-emerald-500 text-white font-bold text-[10px] uppercase mb-1 inline-block">Serve Ace</span>
+                        <h4 class="text-sm font-bold text-white font-heading">Jump Serve Presisi</h4>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 5 -->
+                <div class="relative rounded-2xl overflow-hidden glass-card-dark border border-slate-800 group cursor-pointer h-64" onclick="openLightbox('https://images.unsplash.com/photo-1517649763962-0c623266010b?q=80&w=1000&auto=format&fit=crop', 'Latihan Fisik Ketahanan Stamina Pantai Tolitoli')">
+                    <img src="https://images.unsplash.com/photo-1517649763962-0c623266010b?q=80&w=800&auto=format&fit=crop" alt="Physical Training Beach" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <span class="px-2.5 py-1 rounded-md bg-amber-500 text-slate-950 font-bold text-[10px] uppercase mb-1 inline-block">Latihan Physical</span>
+                        <h4 class="text-sm font-bold text-white font-heading">Stamina & Agilitas Pantai</h4>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 6 -->
+                <div class="relative rounded-2xl overflow-hidden glass-card-dark border border-slate-800 group cursor-pointer h-64" onclick="openLightbox('https://images.unsplash.com/photo-1526676037777-05a232554f77?q=80&w=1000&auto=format&fit=crop', 'Diskusi Taktis Tim Tolitoli saat Time Out Krusial')">
+                    <img src="https://images.unsplash.com/photo-1526676037777-05a232554f77?q=80&w=800&auto=format&fit=crop" alt="Team Discussion Timeout" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <span class="px-2.5 py-1 rounded-md bg-cyan-500 text-slate-950 font-bold text-[10px] uppercase mb-1 inline-block">Strategy</span>
+                        <h4 class="text-sm font-bold text-white font-heading">Time Out Taktis</h4>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CONTACT & RECRUITMENT SECTION -->
+    <section id="kontak" class="relative z-10 py-20 bg-slate-900/60 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-gold text-xs font-bold uppercase tracking-widest block mb-2"><i class="fa-solid fa-paper-plane"></i> UNDANGAN & HUBUNGI</span>
+                <h2 class="text-3xl sm:text-4xl font-heading font-black text-white">Hubungi / Rekrut Masria</h2>
+                <p class="text-slate-400 text-sm mt-2">Terbuka untuk undangan kejuaraan, sparing pertunjukan, rekrutmen klub, maupun tawaran sponsorship.</p>
+                <div class="w-20 h-1.5 gold-gradient-bg mx-auto rounded-full mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                
+                <!-- Direct Contact Cards -->
+                <div class="lg:col-span-5 space-y-4">
+                    
+                    <!-- WhatsApp Card -->
+                    <a href="https://wa.me/6281234567890?text=Halo%20Masria,%20saya%20tertarik%20mengundang%20anda%20bermain%20voli" target="_blank" class="p-5 rounded-2xl glass-card-dark border border-slate-800 hover:border-emerald-500/50 transition flex items-center gap-4 group">
+                        <div class="p-3.5 rounded-xl bg-emerald-500/10 text-emerald-400 text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-400 block font-medium">WhatsApp Direct</span>
+                            <h4 class="text-base font-bold text-white font-heading">+62 812-3456-7890</h4>
+                            <span class="text-[11px] text-emerald-400">Respon cepat via chat</span>
+                        </div>
+                    </a>
+
+                    <!-- Instagram Card -->
+                    <a href="https://instagram.com" target="_blank" class="p-5 rounded-2xl glass-card-dark border border-slate-800 hover:border-pink-500/50 transition flex items-center gap-4 group">
+                        <div class="p-3.5 rounded-xl bg-pink-500/10 text-pink-400 text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-instagram"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-400 block font-medium">Instagram Official</span>
+                            <h4 class="text-base font-bold text-white font-heading">@masria_volleyball</h4>
+                            <span class="text-[11px] text-slate-400">Ikuti update kegiatan harian</span>
+                        </div>
+                    </a>
+
+                    <!-- Email Card -->
+                    <div class="p-5 rounded-2xl glass-card-dark border border-slate-800 flex items-center gap-4">
+                        <div class="p-3.5 rounded-xl bg-blue-500/10 text-blue-400 text-2xl">
+                            <i class="fa-regular fa-envelope"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-400 block font-medium">Email Resmi</span>
+                            <h4 class="text-base font-bold text-white font-heading">masria.volleyball@gmail.com</h4>
+                            <span class="text-[11px] text-slate-400">Untuk tawaran kontrak & proposal</span>
+                        </div>
+                    </div>
+
+                    <!-- Location Card -->
+                    <div class="p-5 rounded-2xl glass-card-dark border border-slate-800 flex items-center gap-4">
+                        <div class="p-3.5 rounded-xl bg-brand-gold/10 text-brand-gold text-2xl">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-400 block font-medium">Lokasi / Home Base</span>
+                            <h4 class="text-base font-bold text-white font-heading">Kabupaten Tolitoli</h4>
+                            <span class="text-[11px] text-slate-400">Sulawesi Tengah, Indonesia</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Interactive Contact Form -->
+                <div class="lg:col-span-7">
+                    <div class="glass-card-dark p-6 sm:p-8 rounded-3xl border border-slate-800 relative">
+                        <h3 class="text-xl font-bold font-heading text-white mb-6 flex items-center gap-2">
+                            <i class="fa-solid fa-envelope-open-text text-brand-gold"></i> Kirim Pesan / Tawaran
+                        </h3>
+
+                        <form id="contactForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-300 mb-1.5">Nama Anda / Utusan Tim</label>
+                                    <input type="text" required placeholder="Contoh: Bpk. Ahmad (Manager Tim)" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-brand-gold transition">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-300 mb-1.5">Nomor Telepon / WhatsApp</label>
+                                    <input type="tel" required placeholder="08xxxxxxxxxx" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-brand-gold transition">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1.5">Maksud / Keperluan Undangan</label>
+                                <select class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-brand-gold transition">
+                                    <option value="Undangan Turnamen">Undangan Turnamen / Kejuaraan Open</option>
+                                    <option value="Rekrutmen Klub">Rekrutmen Klub Voli</option>
+                                    <option value="Sparing / Friendly Match">Sparing / Friendly Match</option>
+                                    <option value="Sponsorship & Endorse">Sponsorship & Kerjasama Brand</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1.5">Pesan Detail / Lokasi Pertandingan</label>
+                                <textarea rows="4" required placeholder="Tuliskan jadwal turnamen, lokasi, dan detail tawaran..." class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-brand-gold transition"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-3.5 rounded-xl gold-gradient-bg text-slate-950 font-heading font-extrabold text-sm tracking-wide hover:shadow-xl hover:shadow-yellow-500/20 hover:scale-[1.01] transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-paper-plane"></i> Kirimkan Pesan Sekarang
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="relative z-10 py-10 bg-slate-950 border-t border-slate-800 text-slate-400 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg gold-gradient-bg flex items-center justify-center font-heading font-black text-slate-950 text-sm">
+                    12
+                </div>
+                <span class="font-heading font-bold text-white text-sm">MASRIA #12 • Tolitoli Volleyball Athlete</span>
+            </div>
+
+            <p class="text-center sm:text-right text-slate-500">
+                &copy; 2026 Masria Tolitoli. Seluruh Hak Cipta Dilindungi.
+            </p>
+
+            <a href="#beranda" class="p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-brand-gold border border-slate-800 transition" title="Kembali ke Atas">
+                <i class="fa-solid fa-arrow-up"></i>
+            </a>
+
+        </div>
+    </footer>
+
+    <!-- TROPHY DETAIL MODAL -->
+    <div id="trophyModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+        <div class="glass-card-dark w-full max-w-lg rounded-3xl border border-slate-700 p-6 sm:p-8 relative shadow-2xl animate-pulse-glow">
+            
+            <button onclick="closeTrophyModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="flex items-center gap-3 mb-4">
+                <div class="p-3 rounded-2xl bg-brand-gold/10 text-brand-gold text-2xl">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <div>
+                    <span id="modalCategory" class="text-xs font-bold uppercase tracking-wider text-brand-gold block">Detail Turnamen</span>
+                    <h3 id="modalTitle" class="text-2xl font-bold font-heading text-white">Bupati Cup Tolitoli</h3>
+                </div>
+            </div>
+
+            <div class="space-y-3 my-6 text-sm text-slate-300">
+                <div class="flex justify-between py-1.5 border-b border-slate-800">
+                    <span class="text-slate-400">Status Capaian:</span>
+                    <span id="modalStatus" class="font-bold text-brand-gold">Juara 1 (Medali Emas)</span>
+                </div>
+                <div class="flex justify-between py-1.5 border-b border-slate-800">
+                    <span class="text-slate-400">Tahun Kejuaraan:</span>
+                    <span id="modalYear" class="font-bold text-white">2025</span>
+                </div>
+                <div class="flex justify-between py-1.5 border-b border-slate-800">
+                    <span class="text-slate-400">Lokasi / Tuan Rumah:</span>
+                    <span id="modalLocation" class="font-bold text-white">Tolitoli</span>
+                </div>
+                <div class="flex justify-between py-1.5 border-b border-slate-800">
+                    <span class="text-slate-400">Penghargaan Khusus:</span>
+                    <span id="modalSpecial" class="font-bold text-amber-400">MVP Player</span>
+                </div>
+                <div class="pt-2">
+                    <span class="text-slate-400 block mb-1">Catatan Pertandingan:</span>
+                    <p id="modalDesc" class="text-xs text-slate-300 leading-relaxed bg-slate-900/80 p-3 rounded-xl border border-slate-800">
+                        Deskripsi pertandingan...
+                    </p>
+                </div>
+            </div>
+
+            <button onclick="triggerConfetti(); closeTrophyModal()" class="w-full py-3 rounded-xl gold-gradient-bg text-slate-950 font-heading font-extrabold text-sm tracking-wide">
+                <i class="fa-solid fa-hands-clapping"></i> Rayakan Selebrasi Juara!
+            </button>
+
+        </div>
+    </div>
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="lightboxModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md" onclick="closeLightbox()">
+        <div class="relative max-w-4xl w-full" onclick="event.stopPropagation()">
+            <button onclick="closeLightbox()" class="absolute -top-12 right-0 text-white text-2xl hover:text-brand-gold">
+                <i class="fa-solid fa-xmark"></i> Close
+            </button>
+            <img id="lightboxImg" src="" alt="Fullscreen Preview" class="w-full max-h-[80vh] object-contain rounded-2xl border border-slate-800">
+            <p id="lightboxCaption" class="text-center text-sm font-semibold text-slate-300 mt-3 font-heading"></p>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toastContainer" class="fixed bottom-6 right-6 z-50 space-y-3 pointer-events-none"></div>
+
+    <script>
+        // Canvas Interactive Particles
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = (Math.random() - 0.5) * 0.8;
+                this.speedY = (Math.random() - 0.5) * 0.8;
+                this.color = Math.random() > 0.5 ? '#FACC15' : '#1E40AF';
+                this.alpha = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < 45; i++) {
+                particles.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateCanvas);
+        }
+        animateCanvas();
+
+        window.onload = function() {
+            // Radar Chart for Volleyball Skill Attributes
+            const chartCtx = document.getElementById('skillRadarChart').getContext('2d');
+            new Chart(chartCtx, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        'Spike / Smash',
+                        'Jump Serve',
+                        'Court Defense',
+                        'Blocking',
+                        'Stamina',
+                        'Leadership'
+                    ],
+                    datasets: [{
+                        label: 'Tingkat Kemampuan (%)',
+                        data: [95, 90, 85, 88, 92, 90],
+                        backgroundColor: 'rgba(250, 204, 21, 0.25)',
+                        borderColor: '#FACC15',
+                        pointBackgroundColor: '#0F2C59',
+                        pointBorderColor: '#FACC15',
+                        pointHoverBackgroundColor: '#FFFFFF',
+                        pointHoverBorderColor: '#FACC15',
+                        borderWidth: 2.5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            pointLabels: {
+                                color: '#E2E8F0',
+                                font: { family: 'Montserrat', size: 11, weight: 'bold' }
+                            },
+                            ticks: { display: false, stepSize: 20 },
+                            suggestedMin: 50,
+                            suggestedMax: 100
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+
+            // Trigger Counter Animation
+            startCounterAnimation();
+        };
+
+        // Mobile Drawer Navigation
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        const menuIcon = document.getElementById('menuIcon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileDrawer.classList.toggle('hidden');
+            if (mobileDrawer.classList.contains('hidden')) {
+                menuIcon.className = 'fa-solid fa-bars text-xl';
+            } else {
+                menuIcon.className = 'fa-solid fa-xmark text-xl';
+            }
+        });
+
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileDrawer.classList.add('hidden');
+                menuIcon.className = 'fa-solid fa-bars text-xl';
+            });
+        });
+
+        // Theme Switcher Toggle Logic
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            if (document.documentElement.classList.contains('dark')) {
+                themeIcon.className = 'fa-solid fa-moon text-lg';
+                showToast('Mode Gelap diaktifkan', 'info');
+            } else {
+                themeIcon.className = 'fa-solid fa-sun text-lg text-amber-500';
+                showToast('Mode Terang diaktifkan', 'info');
+            }
+        });
+
+        // Trophy Filter Tabs
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const trophyCards = document.querySelectorAll('.trophy-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('gold-gradient-bg', 'text-slate-950', 'active');
+                    b.classList.add('bg-slate-800/90', 'text-slate-300');
+                });
+                btn.classList.remove('bg-slate-800/90', 'text-slate-300');
+                btn.classList.add('gold-gradient-bg', 'text-slate-950', 'active');
+
+                const filter = btn.getAttribute('data-filter');
+
+                trophyCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Trophy Modal Handlers
+        function openTrophyModal(title, status, year, location, desc, special) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalStatus').innerText = status;
+            document.getElementById('modalYear').innerText = year;
+            document.getElementById('modalLocation').innerText = location;
+            document.getElementById('modalDesc').innerText = desc;
+            document.getElementById('modalSpecial').innerText = special;
+
+            document.getElementById('trophyModal').classList.remove('hidden');
+            triggerConfetti();
+        }
+
+        function closeTrophyModal() {
+            document.getElementById('trophyModal').classList.add('hidden');
+        }
+
+        // Lightbox Gallery Modal
+        function openLightbox(imgSrc, caption) {
+            document.getElementById('lightboxImg').src = imgSrc;
+            document.getElementById('lightboxCaption').innerText = caption;
+            document.getElementById('lightboxModal').classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightboxModal').classList.add('hidden');
+        }
+
+        // Confetti Burst Trigger
+        function triggerConfetti() {
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 70,
+                    spread: 60,
+                    origin: { y: 0.6 }
+                });
+            }
+        }
+
+        // Animated Counter for Key Stats
+        function startCounterAnimation() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                let count = 0;
+                const speed = Math.ceil(target / 25);
+
+                const updateCount = () => {
+                    count += speed;
+                    if (count < target) {
+                        counter.innerText = count;
+                        setTimeout(updateCount, 50);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        }
+
+        // Download CV Simulation Trigger
+        function downloadAthleteCV() {
+            showToast('Mengunduh Profil CV Atlet Masria...', 'success');
+            setTimeout(() => {
+                triggerConfetti();
+            }, 800);
+        }
+
+        // Form Submit Handler
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            showToast('Pesan berhasil terkirim! Masria akan merespon segera.', 'success');
+            document.getElementById('contactForm').reset();
+            triggerConfetti();
+        }
+
+        // Toast Notification System
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `pointer-events-auto px-5 py-3.5 rounded-2xl glass-card-dark border text-xs font-bold font-heading flex items-center gap-3 shadow-2xl transition-all duration-300 transform translate-y-4 opacity-0`;
+
+            if (type === 'success') {
+                toast.classList.add('border-emerald-500/60', 'text-emerald-400');
+                toast.innerHTML = `<i class="fa-solid fa-circle-check text-base"></i> ${message}`;
+            } else {
+                toast.classList.add('border-brand-gold/60', 'text-brand-gold');
+                toast.innerHTML = `<i class="fa-solid fa-circle-info text-base"></i> ${message}`;
+            }
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-4', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-4');
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
